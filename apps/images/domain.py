@@ -8,7 +8,7 @@ from sqlalchemy.orm import Session
 
 from apps.helpers.local_file_manager import save_upload_file_tmp
 
-from apps.images.repository import create_image, get_all_approved_images
+from apps.images.repository import create_image, get_all_approved_images, get_all_not_approved_images, get_image
 from apps.images.schema import ImageSchemaCreate
 
 ImageFile.LOAD_TRUNCATED_IMAGES = True
@@ -62,7 +62,7 @@ class ImageDomain():
         try:
             self.image_processing_domain.image_save_process_flow()
             image_schema = ImageSchemaCreate(
-                is_approved=True,
+                is_approved=False,
                 root_path=self.image.final_name,
                 filename=self.image.new_file_name,
                 name=self.image.original_file_name,
@@ -76,5 +76,16 @@ class ImageDomain():
     def get_images(self):
         approved_images = get_all_approved_images(db=self.db)
         return approved_images
+
+    def get_not_approved_images(self):
+        approved_images = get_all_not_approved_images(db=self.db)
+        return approved_images
+
+    def approve_image_by_id(self, id: int):
+        image = get_image(db=self.db, image_id=id)
+        image.is_approved = True
+        self.db.add(image)
+        self.db.commit()
+        self.db.refresh(image)
 
 

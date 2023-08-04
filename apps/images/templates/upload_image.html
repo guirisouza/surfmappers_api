@@ -1,22 +1,31 @@
-<div class="page-header">
-    <h1>Bootstrap Upload Control </h1>
-</div>
+{% extends "base.html" %}
+{% set active_page = "list_images" %}
+
+{% block title %}List Images{% endblock %}
+
+{% block head %}
+{{ super() }}
 
 
-<div class="container">
-    <div class="col-md-4"></div>
-    <div class="col-md-4">
-        <form method="post" enctype="multipart/form-data">
-            <input type="file" id="files" name="files" multiple="multiple" />
-            <p>
-                <input type="submit" value="Upload Files" class="btn btn-lg btn-primary" />
-            </p>
-        </form>
-    </div>
-    <div class="col-md-4"></div>
+{% endblock %}
+
+{% block page_content %}
+<div style="display: flex;
+  justify-content: center;">
+    <form action="/images/upload-image" enctype="multipart/form-data" method="post">
+        <div class="input-group" style="
+        margin-top: 20%;">
+
+          <input type="file" name="file" accept=".jpg, .png" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+          <button  class="btn btn-outline-secondary" type="submit" id="inputGroupFileAddon04">ENVIAR</button>
+
+        </div>
+    </form>
 </div>
-<script>
-    jQuery(function ($) {
-        $("#files").shieldUpload();
-    });
-</script>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+
+
+{% endblock %}

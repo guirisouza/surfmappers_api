@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% set active_page = "list_images" %}
+
+{% block title %}List Images{% endblock %}
+
+{% block head %}
+{{ super() }}
+
+
+{% endblock %}
+
+{% block page_content %}
+<div class="row" >
+  {% for image in images %}
+
+  <div class="col-lg-4 col-md-12 mb-4 mb-lg-0"  style="display: flex; flex-direction: column; padding-bottom: 12px;">
+    <img
+      src="{{image.root_path}}"
+      class="img-thumbnail"
+      alt="Boat on Calm Water"
+    />
+    <form style="display: flex; justify-content: center;" action="/images/approve-image/{{image.id}}" enctype="multipart/form-data" method="post">
+    <button type="submit" class="btn btn-primary" >Aprovar</button>
+    </form>
+  </div>
+  {% endfor %}
+<!--  <div class="col-lg-4 mb-4 mb-lg-0">-->
+<!--    <img-->
+<!--      src="https://mdbcdn.b-cdn.net/img/Photos/Vertical/mountain2.webp"-->
+<!--      class="w-100 shadow-1-strong rounded mb-4"-->
+<!--      alt="Mountains in the Clouds"-->
+<!--    />-->
+
+<!--    <img-->
+<!--      src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(73).webp"-->
+<!--      class="w-100 shadow-1-strong rounded mb-4"-->
+<!--      alt="Boat on Calm Water"-->
+<!--    />-->
+<!--  </div>-->
+
+<!--  <div class="col-lg-4 mb-4 mb-lg-0">-->
+<!--    <img-->
+<!--      src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(18).webp"-->
+<!--      class="w-100 shadow-1-strong rounded mb-4"-->
+<!--      alt="Waves at Sea"-->
+<!--    />-->
+
+<!--    <img-->
+<!--      src="https://mdbcdn.b-cdn.net/img/Photos/Vertical/mountain3.webp"-->
+<!--      class="w-100 shadow-1-strong rounded mb-4"-->
+<!--      alt="Yosemite National Park"-->
+<!--    />-->
+<!--  </div>-->
+</div>
+
+
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+
+
+{% endblock %}
+<!-- Gallery -->
+
+<!-- Gallery -->
